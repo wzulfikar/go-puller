@@ -1,10 +1,9 @@
 FROM alpine:3.3
 
-# install openssh and ca-cert
-RUN apk --no-cache add openssh ca-certificates && update-ca-certificates
-
-# generate ssh keypair without prompt
-RUN ssh-keygen -t dsa -N "" -C "" -f /root/.ssh/id_rsa
+# 1. install openssh and ca-cert.
+# 2. update ca cert
+RUN apk --no-cache add openssh ca-certificates \
+	&& update-ca-certificates
 
 COPY entrypoint.sh go-puller /
 
